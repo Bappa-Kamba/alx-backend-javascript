@@ -9,6 +9,9 @@ export default function handleProfileSignup() {
     profileDetails.push(values[1].firstName);
     profileDetails.push(values[1].lastName);
     console.log(profileDetails.join(' '));
-  }).catch(() => console.error('Signup system offline'));
+  }).catch((error) => {
+	throw new Error('Signup system offline');
+	console.error(error)
+  });
   return profileData;
 }
