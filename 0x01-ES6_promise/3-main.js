@@ -1,3 +1,4 @@
 import handleProfileSignup from "./3-all";
 
-handleProfileSignup();
+const res = handleProfileSignup();
+res.then((value) => console.log(value));
