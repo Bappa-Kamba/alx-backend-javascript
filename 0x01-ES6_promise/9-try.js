@@ -7,7 +7,7 @@ export default function guadrail(mathFunction) {
       queue.push('Guardrail was processed');
     }
   } catch (error) {
-	queue.push(String(error));
+    queue.push(String(error));
     queue.push('Guardrail was processed');
   }
 
