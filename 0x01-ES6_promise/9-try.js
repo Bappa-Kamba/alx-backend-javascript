@@ -4,11 +4,11 @@ export default function guadrail(mathFunction) {
     const result = mathFunction();
     if (result) {
       queue.push(result);
-      queue.push('Guadrail was processed');
+      queue.push('Guardrail was processed');
     }
   } catch (error) {
-    queue.push(error.message);
-    queue.push('Guadrail was processed');
+	queue.push(String(error));
+    queue.push('Guardrail was processed');
   }
 
   return queue;
