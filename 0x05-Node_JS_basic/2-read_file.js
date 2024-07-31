@@ -1,10 +1,10 @@
-const fs = require('fs');
+const fs = require('fs').promises;
 
-function countStudents(path) {
+async function countStudents(path) {
   try {
-    // Read the file synchronously
-    const data = fs.readFileSync(path, 'utf8');
-    
+    // Read the file asynchronously
+    const data = await fs.readFile(path, 'utf8');
+
     // Split the file content into lines and filter out empty lines
     const lines = data.trim().split('\n').filter(line => line);
 
@@ -24,20 +24,20 @@ function countStudents(path) {
     for (const student of students) {
       const studentData = student.split(',');
 
-      // Skip if the line doesn't have the expected number of fields
-      if (studentData.length !== headers.length) continue;
+      // Only process the line if it has the expected number of fields
+      if (studentData.length === headers.length) {
+        const firstname = studentData[0].trim();
+        const field = studentData[studentData.length - 1].trim();
 
-      const firstname = studentData[0].trim();
-      const field = studentData[studentData.length - 1].trim();
+        // Initialize the field in the map if not present
+        if (!fields[field]) {
+          fields[field] = { count: 0, students: [] };
+        }
 
-      // Initialize the field in the map if not present
-      if (!fields[field]) {
-        fields[field] = { count: 0, students: [] };
+        // Increment the count and add the student's name to the list
+        fields[field].count += 1;
+        fields[field].students.push(firstname);
       }
-
-      // Increment the count and add the student's name to the list
-      fields[field].count += 1;
-      fields[field].students.push(firstname);
     }
 
     // Log the total number of students
