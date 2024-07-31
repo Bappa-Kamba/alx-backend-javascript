@@ -48,10 +48,8 @@ function countStudents(path) {
       console.log(`Number of students in ${field}: ${count}. List: ${students.join(', ')}`);
     });
   } catch (error) {
-    // Check if the error is related to file reading and log the appropriate message
-    if (error.code === 'ENOENT') {
-      console.error('Cannot load the database');
-    }
+    // Throw the error if the file can't be read
+    throw new Error('Cannot load the database');
   }
 }
 
