@@ -77,11 +77,9 @@ app.get('/students', (_, res) => {
       res.status(200).end(responseText);
     })
     .catch((err) => {
-      responseParts.push(err.message);
-      const responseText = `${responseParts.join('\n')}\n`;
-      res.setHeader('Content-Type', 'text/plain');
-      res.setHeader('Content-Length', Buffer.byteLength(responseText));
-      res.status(200).end(responseText);
+      responseParts.push(err instanceof Error ? err.message : err.toString());
+      const responseText = responseParts.join('\n');
+      res.status(200).set('Content-Type', 'text/plain').send(responseText);
     });
 });
 
