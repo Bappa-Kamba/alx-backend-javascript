@@ -6,7 +6,7 @@ async function countStudents(path) {
     const data = await fs.readFile(path, 'utf8');
 
     // Split the file content into lines and filter out empty lines
-    const lines = data.trim().split('\n').filter(line => line);
+    const lines = data.trim().split('\n').filter((line) => line);
 
     // Check if there's at least a header line
     if (lines.length <= 1) {
@@ -54,4 +54,3 @@ async function countStudents(path) {
 }
 
 module.exports = countStudents;
-
