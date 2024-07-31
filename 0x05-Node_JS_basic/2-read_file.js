@@ -1,12 +1,12 @@
-const fs = require('fs').promises;
+const fs = require('fs');
 
-async function countStudents(path) {
+function countStudents(path) {
   try {
-    // Read the file asynchronously
-    const data = await fs.readFile(path, 'utf8');
+    // Read the file synchronously
+    const data = fs.readFileSync(path, 'utf8');
 
     // Split the file content into lines and filter out empty lines
-    const lines = data.trim().split('\n').filter((line) => line);
+    const lines = data.trim().split('\n').filter(line => line);
 
     // Check if there's at least a header line
     if (lines.length <= 1) {
@@ -21,7 +21,7 @@ async function countStudents(path) {
     const fields = {};
 
     // Iterate over each student line
-    for (const student of students) {
+    students.forEach(student => {
       const studentData = student.split(',');
 
       // Only process the line if it has the expected number of fields
@@ -38,15 +38,15 @@ async function countStudents(path) {
         fields[field].count += 1;
         fields[field].students.push(firstname);
       }
-    }
+    });
 
     // Log the total number of students
     console.log(`Number of students: ${students.length}`);
 
     // Log the number of students in each field and their names
-    for (const [field, { count, students }] of Object.entries(fields)) {
+    Object.entries(fields).forEach(([field, { count, students }]) => {
       console.log(`Number of students in ${field}: ${count}. List: ${students.join(', ')}`);
-    }
+    });
   } catch (error) {
     // Log the error if the file can't be read
     console.error('Cannot load the database');
@@ -54,3 +54,4 @@ async function countStudents(path) {
 }
 
 module.exports = countStudents;
+
