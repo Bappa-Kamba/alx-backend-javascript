@@ -23,7 +23,7 @@ class StudentsController {
         .forEach((field) => {
           const students = data[field];
           responseLines.push(
-            `Number of students in ${field}: ${students.length}. List: ${students.join(', ')}`
+            `Number of students in ${field}: ${students.length}. List: ${students.join(', ')}`,
           );
         });
 
@@ -43,7 +43,8 @@ class StudentsController {
     const { major } = req.params;
 
     if (major !== 'CS' && major !== 'SWE') {
-      return res.status(500).send('Major parameter must be CS or SWE');
+      res.status(500).send('Major parameter must be CS or SWE');
+      return;
     }
 
     try {
@@ -65,4 +66,3 @@ class StudentsController {
 }
 
 module.exports = StudentsController;
-
