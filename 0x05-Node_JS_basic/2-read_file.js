@@ -8,7 +8,7 @@ function countStudents(path) {
     // Split the file content into lines and filter out empty lines
     const lines = data.trim().split('\n').filter((line) => line);
 
-    // Check if there's at least a header line
+    // Check if there's at least one header line and at least one data line
     if (lines.length <= 1) {
       throw new Error('Cannot load the database');
     }
@@ -48,8 +48,10 @@ function countStudents(path) {
       console.log(`Number of students in ${field}: ${count}. List: ${students.join(', ')}`);
     });
   } catch (error) {
-    // Log the error if the file can't be read
-    console.error('Cannot load the database');
+    // Check if the error is related to file reading and log the appropriate message
+    if (error.code === 'ENOENT') {
+      console.error('Cannot load the database');
+    }
   }
 }
 
