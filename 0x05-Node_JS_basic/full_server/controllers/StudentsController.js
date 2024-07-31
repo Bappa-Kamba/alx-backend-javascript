@@ -28,6 +28,7 @@ class StudentsController {
         });
 
       res.status(200).send(responseLines.join('\n'));
+      return;
     } catch (error) {
       console.error('Error in getAllStudents:', error.message); // Log error for debugging
       res.status(500).send('Cannot load the database');
