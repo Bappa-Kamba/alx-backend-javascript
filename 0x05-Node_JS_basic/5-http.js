@@ -2,32 +2,32 @@ const http = require('http');
 const countStudents = require('./3-read_file_async');
 
 const app = http.createServer((req, res) => {
-	res.setHeader('Content-Type', 'text/plain');
-	
-	if (req.url === '/') {
-		res.writeHead(200);
-		res.end('Hello Holberton School!');
-	} else if (req.url === '/students') {
-		res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
 
-		const dbPath = process.argv[2];
-		res.write('This is the list of our students\n');
+  if (req.url === '/') {
+    res.writeHead(200);
+    res.end('Hello Holberton School!');
+  } else if (req.url === '/students') {
+    res.statusCode = 200;
 
-		countStudents(dbPath)
-			.then((data) => {
-				res.write(data);
-				res.end();
-			})
-			.catch ((error) => {
-				res.write('Cannot load the database\n')
-				res.end();
-			});
-	}
+    const dbPath = process.argv[2];
+    res.write('This is the list of our students\n');
+
+    countStudents(dbPath)
+      .then((data) => {
+        res.write(data);
+        res.end();
+      })
+      .catch((error) => {
+        res.write(error.message);
+        res.end();
+      });
+  }
 });
 
 const port = 1245;
 app.listen(port, () => {
-	console.log(`Server is running at http://localhost:${port}/`);
+  console.log(`Server is running at http://localhost:${port}/`);
 });
 
 module.exports = app;
