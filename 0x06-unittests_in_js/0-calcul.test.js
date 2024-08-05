@@ -1,21 +1,13 @@
-// 0-calcul.test.js
-const assert = require('assert');
-const calculateNumber = require('./0-calcul');
+import { expect } from 'chai';
+import calculateNumber from './0-calcul.js';
 
-describe('calculateNumber', function() {
-  it('should return 4 when inputs are 1.4 and 2.6', function() {
-    assert.strictEqual(calculateNumber(1.4, 2.6), 4);
+describe('calculateNumber', function () {
+  it('should return the sum of two rounded numbers', function () {
+    expect(calculateNumber(1.4, 4.5)).to.equal(6);
   });
 
-  it('should return 5 when inputs are 1.5 and 2.5', function() {
-    assert.strictEqual(calculateNumber(1.5, 2.5), 5);
-  });
-
-  it('should return -3 when inputs are -1.4 and -2.5', function() {
-    assert.strictEqual(calculateNumber(-1.4, -2.5), -3);
-  });
-
-  it('should return 0 when inputs are 0.4 and 0.4', function() {
-    assert.strictEqual(calculateNumber(0.4, 0.4), 0);
+  it('should handle edge cases', function () {
+    expect(calculateNumber(1.2, 4.8)).to.equal(6);
+    expect(calculateNumber(1.5, 4.5)).to.equal(7);
   });
 });

@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import calculateNumber from './1-calcul.js';
+import calculateNumber from './2-calcul_chai.js';
 
 describe('calculateNumber', function () {
   it('should return the sum of two rounded numbers when type is SUM', function () {
